@@ -1,24 +1,13 @@
 class Solution {
 public:
     int heightChecker(vector<int>& heights) {
-        vector<char> sorted(heights.begin(), heights.end());
-        // counting sort
-        char freq[101]={0};
-        for(char x: sorted) freq[x]++;
-        int cnt=0;
-        for (int x=1; x<=100; x++){
-            int f=freq[x];
-            vector<char> f_x(f, x);
-            copy(begin(f_x), end(f_x), sorted.begin()+cnt);
-            cnt+=f;
+        vector<int> v(heights);
+        sort(v.begin(),v.end());
+        int count = 0;
+        for(int i=0;i<heights.size();i++){
+            if(heights[i] != v[i])
+             count++;
         }
-        //end of count sort
-
-        int n=heights.size(), ans=0;
-        for(int i=0; i<n; i++)
-            ans+=(heights[i]!=sorted[i]);
-        return ans;      
+        return count;
     }
 };
-
-
